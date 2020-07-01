@@ -1,0 +1,233 @@
+{% sw_extends '@Framework/documents/typesetsh/style_base_portrait.css.twig' %}
+
+
+{% block document_style %}
+@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400';
+
+{% sw_include '@TypesetshPdfGenerator/documents/typesetsh/style_a4.css.twig' %}
+
+
+
+@page {
+    @top-center {
+        content: '{{ 'document.pageText'|trans({'%page%': "' counter(page) '", '%pages%': "' counter(pages) '"})|raw }}';
+        vertical-align: top;
+        padding-top: 10mm;
+    }
+
+    @area header {
+        content: element(header);
+        top: 10mm;
+        right: 10mm;
+        left: 20mm;
+    }
+    @area footer {
+        content: element(footer);
+        padding: 5mm 10mm;
+        bottom: 0mm;
+        height: 50mm;
+        right: 0mm;
+        left: 0mm;
+        background: #F0F0F0;
+        border-top: 1mm solid #f00;
+        box-sizing: border-box;
+    }
+}
+
+
+html {
+    font-size: 9pt;
+}
+
+h1 {
+    font-size: 14pt;
+    clear: both;
+    margin: 0;
+}
+
+.document-comment-container {
+    border-left: 1mm solid #f00;
+    background: #F0F0F0;
+    font-size: 0.9em;
+    padding: 1mm 2mm;
+    margin: 2mm 0;
+}
+
+
+.info {
+    float: right;
+}
+
+h3 {
+    text-align: right;
+    margin: 1em 0 0.5em 0;
+    clear: both;
+}
+table.information {
+    clear: right;
+    border: none 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+table.information td, table.information th {
+    border: none 0;
+    padding: 0;
+
+}
+table.information th {
+    font-weight: bold;
+    padding-right: 2mm;
+    text-align: right;
+}
+table.information td {
+    text-align: right;
+}
+table.information th::after {
+    content: ':';
+}
+
+
+header#logo {
+    position: running(header);
+    text-align: right;
+}
+
+header#logo img {
+    max-height: 20mm;
+}
+
+footer#details {
+    position: running(footer);
+    display: flex;
+    font-size: 9pt;
+    line-height: 140%;
+    color: #666;
+    justify-content: space-between;
+}
+
+footer#details > .col {
+    flex: 0 1 30%;
+}
+
+header#letter {
+    min-height: 60mm;
+}
+header#letter .left {
+    /* Absolute position to fit the letter window */
+    position: absolute;
+    box-sizing: border-box;
+    left: 0;
+    top: 5mm;
+    height: 40mm;
+    width: 90mm;
+    font-size: 10pt;
+    padding: 0;
+}
+
+address.sender {
+    font-size: 0.75em;
+    color: #999;
+    margin-bottom: 1em;
+}
+
+
+
+header#letter .right {
+    float: right;
+    width: 40%;
+}
+
+
+.order-details {
+    display: flow-root;
+}
+
+section.payment {
+    float:left;
+    width: 40%;
+    margin-top: 5mm;
+}
+section.shipping {
+    float:right;
+    width: 40%;
+    margin-top: 5mm;
+}
+
+
+.line-item-container {
+    display: flow-root;
+}
+.sum-container {
+    display: flow-root;
+}
+
+table.line-item-table {
+    clear: both;
+    width: 100%;
+    border: none;
+    font-size: 9pt;
+    margin: 5mm 0;
+}
+
+table.line-item-table th {
+    border: none 0;
+    border-bottom: 0.5mm solid black;
+    font-weight: bold;
+    text-align: left;
+    padding: 2mm;
+}
+table.line-item-table td {
+    border: none 0;
+    padding: 2mm;
+}
+
+table.line-item-table tr:nth-child(even) td {
+    background: #f3f3f3;
+}
+
+table.line-item-table .qty {
+    text-align: center;
+}
+table.line-item-table .price {
+    text-align: right;
+    white-space: nowrap;
+}
+
+table.sum-table {
+    margin-top: 5mm;
+    float: right;
+    border: none;
+    border-collapse: separate;
+    padding: 0;
+    border-spacing: 0;
+
+}
+table.sum-table td, table.sum-table th {
+    border: none;
+    border-width: 0;
+    padding: 1mm 0;
+    line-height: 100%;
+}
+table.sum-table th {
+    font-weight: bold;
+    padding: 1mm 5mm;
+    text-align: left;
+}
+
+table.sum-table .grand td, table.sum-table .grand th {
+    font-size: 1.1em;
+    padding-top: 2mm;
+    vertical-align: baseline;
+}
+table.sum-table .grand td {
+    border-bottom: .5mm double #333;
+}
+
+table.sum-table td {
+    text-align: right;
+}
+
+
+
+
+{% endblock %}

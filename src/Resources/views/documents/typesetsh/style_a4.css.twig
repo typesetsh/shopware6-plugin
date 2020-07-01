@@ -1,0 +1,39 @@
+{% block document_style %}
+
+@page {
+    size: A4;
+    margin: 30mm 10mm 60mm 25mm;
+
+    @area perforate-mark {
+        left: 0mm;
+        top: 148.5mm;
+        width: 3mm;
+        border-bottom: 0.2mm solid #ccc;
+    }
+    @area fold-mark-left-top {
+        left: 0mm;
+        top: 90mm;
+        width: 6mm;
+        border-bottom: 0.2mm dashed #ccc;
+    }
+    @area fold-mark-left-bottom {
+        left: 0mm;
+        top: 195mm;
+        width: 6mm;
+        border-bottom: 0.2mm dashed #ccc;
+    }
+    @area fold-mark-right-top {
+        right: 0mm;
+        top: 90mm;
+        width: 6mm;
+        border-bottom: 0.2mm dashed #ccc;
+    }
+    @area fold-mark-right-bottom {
+        right: 0mm;
+        top: 195mm;
+        width: 6mm;
+        border-bottom: 0.2mm dashed #ccc;
+    }
+}
+
+{% endblock %}

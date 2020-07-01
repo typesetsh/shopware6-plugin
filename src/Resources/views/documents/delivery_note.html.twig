@@ -1,0 +1,45 @@
+{% sw_extends '@TypesetshPdfGenerator/documents/typesetsh/base.html.twig' %}
+
+{% block document_title_tag %}
+    {% trans with {'%deliveryNoteNumber%': config.custom.deliveryNoteNumber, '%orderNumber%':  order.orderNumber} %}document.deliveryNoteHeadline{% endtrans %}
+{% endblock %}
+
+{% block document_headline %}
+    <h1>{% trans with {'%deliveryNoteNumber%': config.custom.deliveryNoteNumber, '%orderNumber%': order.orderNumber} %}document.deliveryNoteHeadline{% endtrans %}</h1>
+{% endblock %}
+
+{% block document_recipient %}
+    <div class="left">
+        {% set firstDelivery = order.deliveries|first %}
+        {% set deliveryAddressId = firstDelivery.shippingOrderAddressId %}
+        {% set deliveryAddress = order.addresses.get(deliveryAddressId) %}
+        <address class="sender">
+            {% block document_recipient_sender %}
+                {{ config.companyAddress }}<br><br>
+            {% endblock %}
+        </address>
+        <address class="recipient">
+            {% if deliveryAddress.company %}
+                {{ deliveryAddress.company }}<br>
+            {% endif %}
+            {{ deliveryAddress.firstName }} {{ deliveryAddress.lastName }}<br>
+            {{ deliveryAddress.street }}<br>
+            {{ deliveryAddress.zipcode }} {{ deliveryAddress.city }}<br>
+            {{ deliveryAddress.country.name }}
+        </address>
+    </div>
+{% endblock %}
+
+{% block document_side_info_contents %}
+    {{ parent() }}
+    <tr>
+        <th>{{ 'document.deliveryDate'|trans|sw_sanitize }}</th>
+        <td>{{config.custom.deliveryDate|format_date('medium', locale=order.saleschannel.language.locale.code)|sw_sanitize }}</td>
+    </tr>
+{% endblock %}
+
+{% block document_line_item_table_shipping %}
+{% endblock %}
+
+{% block document_sum %}{% endblock %}
+{% block document_additional_text %}{% endblock %}

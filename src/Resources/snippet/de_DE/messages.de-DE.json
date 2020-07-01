@@ -1,0 +1,55 @@
+{
+    "document": {
+        "invoiceNumber": "Rechnungs-Nr.",
+        "invoiceHeadline": "Rechnungs-Nr. %invoiceNumber%",
+        "stornoNumber": "Storno-Nr.",
+        "stornoHeadline": "Storno-Nr. %stornoNumber% für Rechnung Nr. %invoiceNumber%",
+        "deliveryNoteNumber": "Lieferschein-Nr.",
+        "deliveryNoteHeadline": "Lieferschein-Nr. %deliveryNoteNumber% für Bestellung Nr. %orderNumber%",
+        "creditNoteNumber": "Gutschein-Nr.",
+        "creditNoteHeadline": "Gutschein-Nr. %creditNoteNumber% für Rechnung Nr. %invoiceNumber%",
+        "customerNumber": "Kunden-Nr.",
+        "date": "Datum",
+        "orderDate": "Bestelldatum",
+        "deliveryDate": "Liefertermin",
+        "page": "Seite %pageNumber%",
+        "orderNumber": "Bestell-Nr.",
+        "taxNumber": "Steuer-Nr.",
+        "vatId": "USt-IdNr.",
+        "taxOffice": "Finanzamt",
+        "bankAccount": "Bankverbindung",
+        "bankIban": "IBAN",
+        "bankBic": "BIC",
+        "companyTel": "Tel.",
+        "companyEmail": "Email",
+        "placeOfJurisdiction": "Gerichtsstand ist %placeOfJurisdiction%",
+        "placeOfFulfillment": "Erfüllungsort ist %placeOfFulfillment%",
+        "ceo": "Geschäftsführer",
+        "businessService": "Business Service",
+        "thankyou": "<p>%firstName% %lastName%, vielen Dank für Ihre Bestellung</p>",
+        "company": {
+            "hotline": "0800 / 000000",
+            "hours": "Mo.-Fr. von 8:00-18:00<br />and Sa. von 10:00-14:00"
+        },
+        "lineItems": {
+            "header": {
+                "position": "Pos.",
+                "label": "Bezeichnung",
+                "quantity": "Anz.",
+                "tax": "MwSt.",
+                "unitPrice": "Stückpreis",
+                "productNumber": "Prod. Nr.",
+                "total": "Gesamt"
+            },
+            "tax": "zzgl. %taxRate%% MwSt.:",
+            "total": "Gesamtsumme:",
+            "totalNet": "Gesamtsumme (Netto):",
+            "shippingCosts": "Versandkosten"
+        },
+        "paymentShippingInfo": {
+            "paymentMethod": "Gewählte Zahlungsart: %paymentMethod%",
+            "shippingMethod": "Gewählte Versandart: %shippingMethod%",
+            "additionalInfo": "Die Ware bleibt, bis zur vollständigen Bezahlung, unser Eigentum."
+        }
+    }
+}

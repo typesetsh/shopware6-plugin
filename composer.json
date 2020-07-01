@@ -1,0 +1,37 @@
+{
+    "name": "typesetsh/shopware6-plugin",
+    "description": "Shopware 6 Typeset.sh PDF Plugin",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jacob Siefer",
+            "email": "mail@jsiefer.de"
+        }
+    ],
+    "require": {
+        "shopware/core": "*",
+        "typesetsh/typesetsh": "^0.8"
+    },
+    "extra": {
+        "shopware-plugin-class": "typesetsh\\Shopware6\\TypesetshPdfGenerator",
+        "label": {
+            "de-DE": "typeset.sh PDF Generator",
+            "en-GB": "typeset.sh PDF Generator"
+        },
+        "description": {
+            "de-DE": "PDF Generierung mit der typeset.sh Engine",
+            "en-GB": "PDF generation with typeset.sh engine"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "typesetsh\\Shopware6\\": "src/"
+        }
+    },
+    "repositories": [{
+            "type": "composer",
+            "url": "https://packages.typeset.sh"
+        }
+    ]
+}

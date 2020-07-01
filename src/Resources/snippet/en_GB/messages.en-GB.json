@@ -1,0 +1,56 @@
+{
+    "document": {
+        "invoiceNumber": "Invoice",
+        "invoiceHeadline": "Invoice %invoiceNumber%",
+        "stornoHeadline": "Cancellation %stornoNumber% for invoice %invoiceNumber%",
+        "stornoNumber": "Cancellation number",
+        "deliveryNoteNumber": "Delivery note",
+        "deliveryNoteHeadline": "Delivery note %deliveryNoteNumber% for order %orderNumber%",
+        "creditNoteNumber": "Credit note",
+        "creditNoteHeadline": "Credit note %creditNoteNumber% for invoice no. %invoiceNumber%",
+        "customerNumber": "Customer",
+        "date": "Date",
+        "orderDate": "Order date",
+        "deliveryDate": "Delivery date",
+        "pageText": "Page %page% of %pages%",
+        "orderNumber": "Order no.",
+        "taxNumber": "Tax no. %taxNumber%",
+        "vatId": "VAT Reg. no.",
+        "taxOffice": "Tax office",
+        "bankAccount": "Bank account",
+        "bankIban": "IBAN",
+        "bankBic": "BIC",
+        "companyTel": "Tel.",
+        "companyEmail": "Email",
+        "placeOfJurisdiction": "Place of jurisdiction:",
+        "placeOfFulfillment": "Place of fulfillment:",
+        "ceo": "CEO",
+        "businessService": "Business Service",
+        "thankyou": "<p>Dear %firstName% %lastName%, thank you for you order, if you have any questions, please don't hesitate to ask.</p>",
+        "company": {
+            "hotline": "0800 / 000000",
+            "hours": "Mo.-Fr. from 8am-6pm<br />and Sa. from 10am-2pm"
+        },
+
+        "lineItems": {
+            "header": {
+                "position": "Pos.",
+                "label": "Label",
+                "tax": "VAT",
+                "quantity": "QTY",
+                "unitPrice": "Unit price",
+                "productNumber": "Prod. no.",
+                "total": "Total"
+            },
+            "tax": "plus %taxRate%% VAT:",
+            "total": "Total:",
+            "totalNet": "Net total:",
+            "shippingCosts": "Shipping costs"
+        },
+        "paymentShippingInfo": {
+            "paymentMethod": "Payment method: %paymentMethod%",
+            "shippingMethod": "Shipping method: %shippingMethod%",
+            "additionalInfo": "Delivered goods remain our property until full payment has been made."
+        }
+    }
+}

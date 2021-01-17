@@ -25,33 +25,29 @@
     {% endif %}
 
 
-
     <!DOCTYPE html>
     <html lang="en">
     <head>
         {% block document_head %}
-        <meta charset="UTF-8">
-        <title>{% block document_title_tag %}{% endblock %}</title>
-        {% sw_include '@TypesetshPdfGenerator/documents/typesetsh/style.css.twig' %}
+            <meta charset="UTF-8">
+            <title>{% block document_title_tag %}{% endblock %}</title>
+            {% sw_include '@TypesetshShopwarePlatform/documents/typesetsh/style.css.twig' %}
         {% endblock %}
     </head>
     <body>
     {% block document_body %}
 
-
         {% if config.displayHeader %}
-        <header id="logo">
-            {% block document_header %}
-                {% if config.logo %}
-                    <img src="{{ config.logo.url }}" class="logo"/>
-                {% endif %}
-            {% endblock %}
-        </header>
+            <header id="logo">
+                {% block document_header %}
+                    {% if config.logo %}
+                        <img src="{{ config.logo.url }}" class="logo"/>
+                    {% endif %}
+                {% endblock %}
+            </header>
         {% endif %}
 
-
         <header id="letter">
-
             {% block document_recipient %}
                 <div class="left">
                     {% block document_recipient_sender %}
@@ -69,81 +65,98 @@
                 </div>
             {% endblock %}
 
-
             <div class="right">
                 {% block document_side_info %}
                     <div class="info">
                         <table class="information">
                             <tbody>
                             {% block document_side_info_contents %}
-                            <tr>
-                                <th>{{ 'document.customerNumber'|trans|sw_sanitize }}</th>
-                                <td>{{ customer.customerNumber|sw_sanitize }}</td>
-                            </tr>
-                            <tr>
-                                <th> {{ 'document.orderNumber'|trans|sw_sanitize }}</th>
-                                <td> {{ order.orderNumber|sw_sanitize }}</td>
-                            </tr>
-                            <tr>
-                                <th>{{ 'document.date'|trans|sw_sanitize }}</th>
-                                <td>{{ config.documentDate|format_date('medium', locale=locale)|sw_sanitize }}</td>
-                            </tr>
-                            <tr>
-                                <th>{{ 'document.vatId'|trans|sw_sanitize }}</th>
-                                <td>{{ config.vatId|sw_sanitize }}</td>
-                            </tr>
+                                <tr>
+                                    <th>{{ 'document.customerNumber'|trans|sw_sanitize }}</th>
+                                    <td>{{ customer.customerNumber|sw_sanitize }}</td>
+                                </tr>
+                                <tr>
+                                    <th> {{ 'document.orderNumber'|trans|sw_sanitize }}</th>
+                                    <td> {{ order.orderNumber|sw_sanitize }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'document.orderDate'|trans|sw_sanitize }}</th>
+                                    <td>{{ order.orderDateTime|format_date('medium', locale=locale)|sw_sanitize }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'document.date'|trans|sw_sanitize }}</th>
+                                    <td>{{ config.documentDate|format_date('medium', locale=locale)|sw_sanitize }}</td>
+                                </tr>
                             {% endblock %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="info">
-                        <h3>{{ 'document.businessService'|trans|sw_sanitize }}</h3>
-                        <table class="information">
-                            <tbody>
-                            <tr>
-                                <th>{{ 'document.companyEmail'|trans|sw_sanitize }}</th>
-                                <td>{{ config.vatId|sw_sanitize }}</td>
-                            </tr>
-                            <tr>
-                                <th>{{ 'document.companyTel'|trans|sw_sanitize }}</th>
-                                <td>{{ 'document.company.hotline'|trans|sw_sanitize }}</td>
-                            </tr>
-                            <tr style="font-size: 0.9em; color:#444;">
-                                <td colspan="2">{{ 'document.company.hours'|trans|sw_sanitize }}</td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
                 {% endblock %}
             </div>
-
         </header>
 
         {% if config.displayFooter %}
-        <footer id="details">
-            <div class="col">
-                {% if config.logo %}
-                    <img src="{{ config.logo.url }}" style="height: 2em; display: block; margin-bottom: 1em;"/>
-                {% endif %}
+            <footer id="footer">
+                {% block document_footer %}
+                    <div class="footer-details">
+                        {% block document_footer_first_column %}
+                            <ul>
+                                {% block document_footer_company_name %}
+                                   {% if config.companyName %} <li class="bold">{{ config.companyName }}</li>{% endif %}
+                                {% endblock %}
+                                {% block document_footer_company %}
+                                    <li class="spacing">{{ config.companyAddress|replace({' - ': '<br/>'})|raw }}</li>
+                                {% endblock %}
+                                {% if config.executiveDirector %}
+                                    {% block document_footer_ceo %}
+                                        <li class="spacing">{{ 'document.ceo'|trans|sw_sanitize }}: {{ config.executiveDirector }}</li>
+                                    {% endblock %}
+                                {% endif %}
+                            </ul>
+                        {% endblock %}
 
-                {{ config.companyAddress }}<br />
-                <br />
-                <a href="{{ config.companyUrl }}">{{ config.companyUrl }}</a>
-            </div>
-            <div class="col">
-                {{ 'document.placeOfJurisdiction'|trans|sw_sanitize }}<br />
-                {{ config.placeOfJurisdiction }}<br />
-                {{ 'document.placeOfFulfillment'|trans|sw_sanitize }}<br />
-                {{ config.placeOfFulfillment }}
-            </div>
-            <div class="col">
-                {{ 'document.bankAccount'|trans|sw_sanitize }}<br />
-                <strong>{{ config.bankName }}</strong><br />
-                <strong>{{ 'document.bankIban'|trans|sw_sanitize }}:</strong> {{ config.bankIban }}<br />
-                <strong>{{ 'document.bankBic'|trans|sw_sanitize }}:</strong> {{ config.bankBic }}
-            </div>
+                        {% block document_footer_second_column %}
+                            <ul>
+                                {% block document_footer_bank_account %}
+                                    {% if config.companyName %}<li class="bold">{{ 'document.bankAccount'|trans|sw_sanitize }}</li>{% endif %}
+                                {% endblock %}
+                                {% block document_footer_bank_name %}
+                                    {% if config.bankName %}<li>{{ config.bankName }}</li>{% endif %}
+                                {% endblock %}
+                                {% block document_footer_bank_iban %}
+                                    {% if config.bankIban %}<li>{{ 'document.bankIban'|trans({'%bankIban%': config.bankIban})|sw_sanitize }}</li>{% endif %}
+                                {% endblock %}
+                                {% block document_footer_bank_bic %}
+                                    {% if config.bankBic %}<li>{{ 'document.bankBic'|trans({'%bankBic%': config.bankBic})|sw_sanitize }}</li>{% endif %}
+                                {% endblock %}
+                            </ul>
+                        {% endblock %}
 
-        </footer>
+                        {% block document_footer_third_column %}
+                            <ul>
+                                {% block document_footer_vat_id %}
+                                    {% if config.vatId %}<li>{{ 'document.vatId'|trans({'%vatId%': config.vatId})|sw_sanitize }}</li>{% endif %}
+                                {% endblock %}
+                                {% block document_footer_tax_number %}
+                                    {% if config.taxNumber %}<li>{{ 'document.taxNumber'|trans({'%taxNumber%': config.taxNumber})|sw_sanitize }}</li>{% endif %}
+                                {% endblock %}
+                                {% block document_footer_tax_office %}
+                                    {% if config.taxOffice %}<li>{{ 'document.taxOffice'|trans({'%taxOffice%': config.taxOffice})|sw_sanitize }}</li>{% endif %}
+                                {% endblock %}
+                                {% block document_footer_place_of_jurisdiction %}
+                                    {% if config.placeOfJurisdiction %}<li>{{ 'document.placeOfJurisdiction'|trans({'%placeOfJurisdiction%': config.placeOfJurisdiction})|sw_sanitize }}</li>{% endif %}
+                                {% endblock %}
+                                {% block document_footer_place_of_fulfillment %}
+                                    {% if config.placeOfFulfillment %}<li>{{ 'document.placeOfFulfillment'|trans({'%placeOfFulfillment%': config.placeOfFulfillment})|sw_sanitize }}</li>{% endif %}
+                                {% endblock %}
+                                {% block document_footer_payment_shipping_additional_info %}
+                                    {% deprecated '@deprecated tag:v6.4.0 The "document_footer_payment_shipping_additional_info" block is deprecated, use "document_payment_shipping_additional" instead.' %}
+                                {% endblock %}
+                            </ul>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </footer>
         {% endif %}
 
         <div class="document-title-container">
@@ -156,10 +169,8 @@
             </div>
         {% endif %}
 
-
         {% block items %}
             {% if config.displayLineItems %}
-
                 <div class="line-item-container">
                     {% block document_line_items %}
                         <table class="line-item-table">
@@ -173,7 +184,7 @@
                                     {% endblock %}
 
                                     {% block document_line_item_table_head_product_number %}
-                                        <th>{{ 'document.lineItems.header.productNumber'|trans|sw_sanitize  }}</th>
+                                        <th>{{ 'document.lineItems.header.productNumber'|trans|sw_sanitize }}</th>
                                     {% endblock %}
 
                                     {% block document_line_item_table_head_label %}
@@ -231,7 +242,8 @@
                                             {% block document_line_item_table_prices %}
                                                 {% if config.displayPrices %}
                                                     {% block document_line_item_table_row_tax_rate %}
-                                                        <td class="price">{{ lineItem.price.taxRules.first.taxRate }}%</td>
+                                                        <td class="price">{{ lineItem.price.taxRules.first.taxRate }}%
+                                                        </td>
                                                     {% endblock %}
                                                     {% block document_line_item_row_table_unit_price %}
                                                         <td class="price">{{ lineItem.unitPrice|currency(currencyIsoCode) }}</td>
@@ -267,7 +279,8 @@
                                             <td class="qty">1</td>
                                         {% endblock %}
                                         {% block document_line_item_table_shipping_tax %}
-                                            <td class="price">{% for tax in order.deliveries.first.shippingCosts.calculatedTaxes %}{{ tax.taxRate }}%{% if loop.last %}{% else %}<br>{% endif %}{% endfor %}</td>
+                                            <td class="price">{% for tax in order.deliveries.first.shippingCosts.calculatedTaxes %}{{ tax.taxRate }}%{% if loop.last %}{% else %}
+                                                    <br>{% endif %}{% endfor %}</td>
                                         {% endblock %}
                                         {% block document_line_item_table_unit_price %}
                                             <td class="price">{{ order.shippingTotal|currency(currencyIsoCode) }}</td>
@@ -328,15 +341,17 @@
                 </div>
             {% endblock %}
         {% endblock %}
-        
+
         {% block document_payment_shipping %}
             <div class="payment-shipping-container">
                 {% block document_payment_shipping_inner %}
                     {% block document_payment %}
-                        {{ 'document.paymentShippingInfo.paymentMethod'|trans({'%paymentMethod%': order.transactions.first.paymentMethod.name})|sw_sanitize }}<br>
+                        {{ 'document.paymentShippingInfo.paymentMethod'|trans({'%paymentMethod%': order.transactions.first.paymentMethod.name})|sw_sanitize }}
+                        <br>
                     {% endblock %}
                     {% block document_shipping %}
-                        {{ 'document.paymentShippingInfo.shippingMethod'|trans({'%shippingMethod%': order.deliveries.first.shippingMethod.name})|sw_sanitize }}<br><br>
+                        {{ 'document.paymentShippingInfo.shippingMethod'|trans({'%shippingMethod%': order.deliveries.first.shippingMethod.name})|sw_sanitize }}
+                        <br><br>
                     {% endblock %}
                     {% block document_payment_shipping_additional %}
                         {{ 'document.paymentShippingInfo.additionalInfo'|trans|sw_sanitize }}<br>
@@ -344,14 +359,7 @@
                 {% endblock %}
             </div>
         {% endblock %}
-
-        {% block document_additional_text %}
-            <div style="clear: both; margin-top: 10mm; text-align: justify; text-align-last: left">
-                {% trans with {'%firstName%': customer.firstName, '%lastName%': customer.lastName} %}document.thankyou{% endtrans %}
-            </div>
-        {% endblock %}
-        {% endblock %}
-
+    {% endblock %}
     </body>
     </html>
 

@@ -1,12 +1,10 @@
-{% sw_extends '@TypesetshPdfGenerator/documents/typesetsh/base.html.twig' %}
+{% sw_extends '@TypesetshShopwarePlatform/documents/typesetsh/base.html.twig' %}
 
 {% block document_title_tag %}{% trans with {'%stornoNumber%': order.id} %}document.stornoHeadline{% endtrans %}{% endblock %}
 
 {% block document_headline %}
     <h1>{% trans with {'%stornoNumber%': config.custom.stornoNumber, '%invoiceNumber%': config.custom.invoiceNumber} %}document.stornoHeadline{% endtrans %}</h1>
 {% endblock %}
-
-
 
  {% block document_side_info_contents %}
      {{ parent() }}

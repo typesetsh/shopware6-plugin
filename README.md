@@ -20,8 +20,10 @@ Get access to your typeset.sh repository.
 See the [typeset.sh documentation](https://typeset.sh/en/documentation/php).
 
  ```bash
+ composer config repositories.typeset composer https://packages.typeset.sh
  composer require typesetsh/shopware6-plugin
- php bin/console plugin:install --activate --clearCache TypesetshPdfGenerator
+ php bin/console plugin:refresh
+ php bin/console plugin:install -a -c TypesetshShopwarePlatform
  ```
 
 

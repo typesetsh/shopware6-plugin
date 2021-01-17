@@ -6,15 +6,22 @@
     "authors": [
         {
             "name": "Jacob Siefer",
-            "email": "mail@jsiefer.de"
+            "email": "mail@jsiefer.de",
+            "role": "Manufacturer"
+        },
+        {
+            "name": "Rouven Alexander Rieker",
+            "email": "therouv@googlemail.com",
+            "role": "Developer"
         }
     ],
     "require": {
         "shopware/core": "*",
-        "typesetsh/typesetsh": "^0.8"
+        "typesetsh/typesetsh": "^0.15"
     },
     "extra": {
-        "shopware-plugin-class": "typesetsh\\Shopware6\\TypesetshPdfGenerator",
+        "shopware-plugin-class": "Typesetsh\\ShopwarePlatform\\TypesetshShopwarePlatform",
+        "copyright": "(c) Jacob Siefer",
         "label": {
             "de-DE": "typeset.sh PDF Generator",
             "en-GB": "typeset.sh PDF Generator"
@@ -26,10 +33,11 @@
     },
     "autoload": {
         "psr-4": {
-            "typesetsh\\Shopware6\\": "src/"
+            "Typesetsh\\ShopwarePlatform\\": "src/"
         }
     },
-    "repositories": [{
+    "repositories": [
+        {
             "type": "composer",
             "url": "https://packages.typeset.sh"
         }

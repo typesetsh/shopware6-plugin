@@ -26,7 +26,6 @@
         "placeOfFulfillment": "Place of fulfillment:",
         "ceo": "CEO",
         "businessService": "Business Service",
-        "thankyou": "<p>Dear %firstName% %lastName%, thank you for you order, if you have any questions, please don't hesitate to ask.</p>",
         "company": {
             "hotline": "0800 / 000000",
             "hours": "Mo.-Fr. from 8am-6pm<br />and Sa. from 10am-2pm"

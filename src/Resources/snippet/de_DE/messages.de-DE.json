@@ -13,20 +13,20 @@
         "orderDate": "Bestelldatum",
         "deliveryDate": "Liefertermin",
         "page": "Seite %pageNumber%",
+        "pageText": "Seite %page% von %pages%",
         "orderNumber": "Bestell-Nr.",
-        "taxNumber": "Steuer-Nr.",
-        "vatId": "USt-IdNr.",
-        "taxOffice": "Finanzamt",
+        "taxNumber": "Steuer-Nr.: %taxNumber%",
+        "vatId": "USt-IdNr.: %vatId%",
+        "taxOffice": "Finanzamt: %taxOffice%",
         "bankAccount": "Bankverbindung",
-        "bankIban": "IBAN",
-        "bankBic": "BIC",
+        "bankIban": "IBAN: %bankIban%",
+        "bankBic": "BIC: %bankBic%",
         "companyTel": "Tel.",
         "companyEmail": "Email",
-        "placeOfJurisdiction": "Gerichtsstand ist %placeOfJurisdiction%",
-        "placeOfFulfillment": "Erfüllungsort ist %placeOfFulfillment%",
+        "placeOfJurisdiction": "Gerichtsstand: %placeOfJurisdiction%",
+        "placeOfFulfillment": "Erfüllungsort: %placeOfFulfillment%",
         "ceo": "Geschäftsführer",
         "businessService": "Business Service",
-        "thankyou": "<p>%firstName% %lastName%, vielen Dank für Ihre Bestellung</p>",
         "company": {
             "hotline": "0800 / 000000",
             "hours": "Mo.-Fr. von 8:00-18:00<br />and Sa. von 10:00-14:00"
@@ -49,7 +49,7 @@
         "paymentShippingInfo": {
             "paymentMethod": "Gewählte Zahlungsart: %paymentMethod%",
             "shippingMethod": "Gewählte Versandart: %shippingMethod%",
-            "additionalInfo": "Die Ware bleibt, bis zur vollständigen Bezahlung, unser Eigentum."
+            "additionalInfo": "Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum."
         }
     }
 }

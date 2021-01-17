@@ -1,4 +1,4 @@
-{% sw_extends '@TypesetshPdfGenerator/documents/typesetsh/base.html.twig' %}
+{% sw_extends '@TypesetshShopwarePlatform/documents/typesetsh/base.html.twig' %}
 
 {% block document_title_tag %}
     {% trans with {'%deliveryNoteNumber%': config.custom.deliveryNoteNumber, '%orderNumber%':  order.orderNumber} %}document.deliveryNoteHeadline{% endtrans %}
@@ -34,7 +34,7 @@
     {{ parent() }}
     <tr>
         <th>{{ 'document.deliveryDate'|trans|sw_sanitize }}</th>
-        <td>{{config.custom.deliveryDate|format_date('medium', locale=order.saleschannel.language.locale.code)|sw_sanitize }}</td>
+        <td>{{ config.custom.deliveryDate|format_date('medium', locale=order.saleschannel.language.locale.code)|sw_sanitize }}</td>
     </tr>
 {% endblock %}
 

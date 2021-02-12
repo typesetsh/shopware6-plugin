@@ -30,6 +30,7 @@
     <head>
         {% block document_head %}
             <meta charset="UTF-8">
+            <meta name="WCAG" content="2.1">
             <title>{% block document_title_tag %}{% endblock %}</title>
             {% sw_include '@TypesetshShopwarePlatform/documents/typesetsh/style.css.twig' %}
         {% endblock %}
@@ -41,7 +42,7 @@
             <header id="logo">
                 {% block document_header %}
                     {% if config.logo %}
-                        <img src="{{ config.logo.url }}" class="logo"/>
+                        <img src="{{ config.logo.url }}" alt="{{ config.companyName }}" class="logo"/>
                     {% endif %}
                 {% endblock %}
             </header>
@@ -69,26 +70,24 @@
                 {% block document_side_info %}
                     <div class="info">
                         <table class="information">
-                            <tbody>
                             {% block document_side_info_contents %}
                                 <tr>
-                                    <th>{{ 'document.customerNumber'|trans|sw_sanitize }}</th>
+                                    <th scope="row">{{ 'document.customerNumber'|trans|sw_sanitize }}</th>
                                     <td>{{ customer.customerNumber|sw_sanitize }}</td>
                                 </tr>
                                 <tr>
-                                    <th> {{ 'document.orderNumber'|trans|sw_sanitize }}</th>
+                                    <th scope="row"> {{ 'document.orderNumber'|trans|sw_sanitize }}</th>
                                     <td> {{ order.orderNumber|sw_sanitize }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{{ 'document.orderDate'|trans|sw_sanitize }}</th>
+                                    <th scope="row">{{ 'document.orderDate'|trans|sw_sanitize }}</th>
                                     <td>{{ order.orderDateTime|format_date('medium', locale=locale)|sw_sanitize }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{{ 'document.date'|trans|sw_sanitize }}</th>
+                                    <th scope="row">{{ 'document.date'|trans|sw_sanitize }}</th>
                                     <td>{{ config.documentDate|format_date('medium', locale=locale)|sw_sanitize }}</td>
                                 </tr>
                             {% endblock %}
-                            </tbody>
                         </table>
                     </div>
                 {% endblock %}
@@ -179,39 +178,39 @@
                                 {% block document_line_item_table_head %}
                                     {% block document_line_item_table_head_position %}
                                         {% if config.displayLineItemPosition %}
-                                            <th>{{ 'document.lineItems.header.position'|trans|sw_sanitize }}</th>
+                                            <th scope="col">{{ 'document.lineItems.header.position'|trans|sw_sanitize }}</th>
                                         {% endif %}
                                     {% endblock %}
 
                                     {% block document_line_item_table_head_product_number %}
-                                        <th>{{ 'document.lineItems.header.productNumber'|trans|sw_sanitize }}</th>
+                                        <th scope="col">{{ 'document.lineItems.header.productNumber'|trans|sw_sanitize }}</th>
                                     {% endblock %}
 
                                     {% block document_line_item_table_head_label %}
-                                        <th>{{ 'document.lineItems.header.label'|trans|sw_sanitize }}</th>
+                                        <th scope="col">{{ 'document.lineItems.header.label'|trans|sw_sanitize }}</th>
                                     {% endblock %}
 
                                     {% block document_line_item_table_head_quantity %}
-                                        <th class="qty">{{ 'document.lineItems.header.quantity'|trans|sw_sanitize }}</th>
+                                        <th scope="col" class="qty">{{ 'document.lineItems.header.quantity'|trans|sw_sanitize }}</th>
                                     {% endblock %}
 
                                     {% block document_line_item_table_head_prices %}
                                         {% if config.displayPrices %}
                                             {% block document_line_item_table_head_tax_rate %}
-                                                <th class="price">{{ 'document.lineItems.header.tax'|trans|sw_sanitize }}</th>
+                                                <th scope="col" class="price">{{ 'document.lineItems.header.tax'|trans|sw_sanitize }}</th>
                                             {% endblock %}
                                             {% block document_line_item_table_head_unit_price %}
-                                                <th class="price">{{ 'document.lineItems.header.unitPrice'|trans|sw_sanitize }}</th>
+                                                <th scope="col" class="price">{{ 'document.lineItems.header.unitPrice'|trans|sw_sanitize }}</th>
                                             {% endblock %}
                                             {% block document_line_item_table_head_total_price %}
-                                                <th class="price">{{ 'document.lineItems.header.total'|trans|sw_sanitize }}</th>
+                                                <th scope="col" class="price">{{ 'document.lineItems.header.total'|trans|sw_sanitize }}</th>
                                             {% endblock %}
                                         {% endif %}
                                     {% endblock %}
                                 {% endblock %}
                             </tr>
                             </thead>
-
+                            <tbody class="line-items">
                             {% block document_line_item_table_iterator %}
                                 {# @var lineItem \Shopware\Core\Checkout\Order\Aggregate\OrderLineItem\OrderLineItemEntity #}
                                 {% for lineItem in lineItems %}
@@ -260,7 +259,8 @@
 
                             {% block document_line_item_table_custom %}
                             {% endblock %}
-
+                            </tbody>
+                            <tbody class="shipping-items">
                             {% block document_line_item_table_shipping %}
                                 {% if loop.last == true %}
                                     <tr class="line-item">
@@ -291,6 +291,7 @@
                                     </tr>
                                 {% endif %}
                             {% endblock %}
+                            </tbody>
                         </table>
                     {% endblock %}
                 </div>
@@ -304,7 +305,7 @@
                                 {% block document_sum_total_net %}
                                     <tr>
                                         {% block document_sum_total_net_label %}
-                                            <th class="align-right">{{ 'document.lineItems.totalNet'|trans|sw_sanitize }}</th>
+                                            <th scope="row" class="align-right">{{ 'document.lineItems.totalNet'|trans|sw_sanitize }}</th>
                                         {% endblock %}
                                         {% block document_sum_total_net_price %}
                                             <td class="align-right">{{ order.amountNet|currency(currencyIsoCode) }}</td>
@@ -316,7 +317,7 @@
                                     {% for calculatedTax in order.price.calculatedTaxes.sortByTax %}
                                         <tr>
                                             {% block document_sum_tax_label %}
-                                                <th>{{ 'document.lineItems.tax'|trans({'%taxRate%': calculatedTax.taxRate})|sw_sanitize }}</th>
+                                                <th scope="row">{{ 'document.lineItems.tax'|trans({'%taxRate%': calculatedTax.taxRate})|sw_sanitize }}</th>
                                             {% endblock %}
                                             {% block document_sum_tax_rate %}
                                                 <td>{{ calculatedTax.tax|currency(currencyIsoCode) }}</td>
@@ -328,7 +329,7 @@
                                 {% block document_sum_total %}
                                     <tr class="grand">
                                         {% block document_sum_total_label %}
-                                            <th>{{ 'document.lineItems.total'|trans|sw_sanitize }}</th>
+                                            <th scope="row">{{ 'document.lineItems.total'|trans|sw_sanitize }}</th>
                                         {% endblock %}
                                         {% block document_sum_total_price %}
                                             <td>{{ order.amountTotal|currency(currencyIsoCode) }}</td>

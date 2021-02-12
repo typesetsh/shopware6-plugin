@@ -9,7 +9,7 @@
  {% block document_side_info_contents %}
      {{ parent() }}
      <tr>
-         <th>{{ 'document.stornoNumber'|trans|sw_sanitize }}</th>
+         <th scope="row">{{ 'document.stornoNumber'|trans|sw_sanitize }}</th>
          <td>{{ config.custom.stornoNumber }}</td>
      </tr>
  {% endblock %}

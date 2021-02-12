@@ -33,7 +33,7 @@
 {% block document_side_info_contents %}
     {{ parent() }}
     <tr>
-        <th>{{ 'document.deliveryDate'|trans|sw_sanitize }}</th>
+        <th scope="row">{{ 'document.deliveryDate'|trans|sw_sanitize }}</th>
         <td>{{ config.custom.deliveryDate|format_date('medium', locale=order.saleschannel.language.locale.code)|sw_sanitize }}</td>
     </tr>
 {% endblock %}

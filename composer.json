@@ -17,7 +17,7 @@
     ],
     "require": {
         "shopware/core": "*",
-        "typesetsh/typesetsh": "^0.15"
+        "typesetsh/typesetsh": "^0.16"
     },
     "extra": {
         "shopware-plugin-class": "Typesetsh\\ShopwarePlatform\\TypesetshShopwarePlatform",

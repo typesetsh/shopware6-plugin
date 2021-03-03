@@ -75,9 +75,15 @@
                                     <th scope="row">{{ 'document.customerNumber'|trans|sw_sanitize }}</th>
                                     <td>{{ customer.customerNumber|sw_sanitize }}</td>
                                 </tr>
+                                {% if customer.customer.vatIds %}
+                                    <tr>
+                                        <th scope="row">{{ 'document.customerVatId'|trans|sw_sanitize }}</th>
+                                        <td>{{ customer.customer.vatIds[0]|sw_sanitize }}</td>
+                                    </tr>
+                               {% endif %}
                                 <tr>
-                                    <th scope="row"> {{ 'document.orderNumber'|trans|sw_sanitize }}</th>
-                                    <td> {{ order.orderNumber|sw_sanitize }}</td>
+                                    <th scope="row">{{ 'document.orderNumber'|trans|sw_sanitize }}</th>
+                                    <td>{{ order.orderNumber|sw_sanitize }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">{{ 'document.orderDate'|trans|sw_sanitize }}</th>

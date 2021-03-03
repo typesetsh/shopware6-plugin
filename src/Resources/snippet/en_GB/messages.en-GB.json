@@ -16,6 +16,7 @@
         "orderNumber": "Order no.",
         "taxNumber": "Tax no. %taxNumber%",
         "vatId": "VAT Reg. no.",
+        "customerVatId": "Customer VAT ID",
         "taxOffice": "Tax office",
         "bankAccount": "Bank account",
         "bankIban": "IBAN",

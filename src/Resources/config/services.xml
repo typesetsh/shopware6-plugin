@@ -2,11 +2,18 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="typesetsh_pdf.allowed_directories" type="collection">
+            <parameter>%shopware.filesystem.temp.config.root%</parameter>
+            <parameter>%shopware.filesystem.public.config.root%</parameter>
+        </parameter>
+        <parameter key="typesetsh_pdf.base_dir">%shopware.filesystem.public.config.root%</parameter>
+        <parameter key="typesetsh_pdf.http.cache_dir">%kernel.cache_dir%/typesetsh</parameter>
+        <parameter key="typesetsh_pdf.http.timeout">10</parameter>
+        <parameter key="typesetsh_pdf.http.download_limit">10485760</parameter>
+    </parameters>
     <services>
-        <service id="Shopware\Core\Checkout\Document\FileGenerator\PdfGenerator" class="Typesetsh\ShopwarePlatform\PdfGenerator">
-            <argument>%shopware.filesystem.temp.config.root%</argument>
-            <argument>%shopware.filesystem.public.config.root%</argument>
-
+        <service id="Shopware\Core\Checkout\Document\FileGenerator\PdfGenerator" class="Typesetsh\ShopwarePlatform\PdfGenerator" autowire="true">
             <tag name="file.generator"/>
         </service>
     </services>

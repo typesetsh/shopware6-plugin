@@ -17,7 +17,7 @@
     ],
     "require": {
         "shopware/core": "*",
-        "typesetsh/typesetsh": "^0.16"
+        "typesetsh/pdf-bundle": "^9.0.1"
     },
     "extra": {
         "shopware-plugin-class": "Typesetsh\\ShopwarePlatform\\TypesetshShopwarePlatform",

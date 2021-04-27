@@ -4,39 +4,25 @@ declare(strict_types=1);
 
 namespace Typesetsh\ShopwarePlatform;
 
-use Shopware\Core\Checkout\Document\FileGenerator\FileTypes;
-use Shopware\Core\Checkout\Document\FileGenerator\PdfGenerator as ShopwarePdfGenerator;
-use Shopware\Core\Checkout\Document\GeneratedDocument;
-use Typesetsh;
+use Shopware\Core\Checkout\Document;
+use Typesetsh\PdfBundle;
 
-class PdfGenerator extends ShopwarePdfGenerator
+class PdfGenerator extends Document\FileGenerator\PdfGenerator
 {
     public const FILE_EXTENSION = 'pdf';
     public const FILE_CONTENT_TYPE = 'application/pdf';
 
-    /** @var int */
-    public $timeout = 10;
+    /** @var PdfBundle\PdfGenerator */
+    private $pdfGenerator;
 
-    /** @var int */
-    public $downloadLimit = 1024 * 1024 * 10;
-
-    /** @var Typesetsh\UriResolver */
-    private $uriResolver;
-
-    public function __construct(string $cacheDir, string $publicDir)
+    public function __construct(PdfBundle\PdfGenerator $pdfGenerator)
     {
-        $schemes = [];
-        $schemes['data'] = new Typesetsh\UriResolver\Data($cacheDir);
-        $schemes['file'] = new Typesetsh\UriResolver\File([$publicDir]);
-        $schemes['http'] =
-        $schemes['https'] = new Typesetsh\UriResolver\Http($cacheDir, $this->timeout, $this->downloadLimit);
-
-        $this->uriResolver = new Typesetsh\UriResolver($schemes);
+        $this->pdfGenerator = $pdfGenerator;
     }
 
     public function supports(): string
     {
-        return FileTypes::PDF;
+        return Document\FileGenerator\FileTypes::PDF;
     }
 
     public function getExtension(): string
@@ -49,16 +35,11 @@ class PdfGenerator extends ShopwarePdfGenerator
         return self::FILE_CONTENT_TYPE;
     }
 
-    public function generate(GeneratedDocument $generatedDocument): string
+    public function generate(Document\GeneratedDocument $generatedDocument): string
     {
         $html = $generatedDocument->getHtml();
+        $result = $this->pdfGenerator->render($html);
 
-        try {
-            $pdf = Typesetsh\createPdf($html, $this->uriResolver);
-
-            return $pdf->asString();
-        } catch (\Exception $e) {
-            throw $e;
-        }
+        return $result->asString();
     }
 }
